@@ -1,4 +1,6 @@
-from logic_utils import check_guess
+import pytest
+
+from logic_utils import check_guess, get_range_for_difficulty, parse_guess
 
 def test_winning_guess():
     # If the secret is 50 and guess is 50, it should be a win
@@ -14,3 +16,19 @@ def test_guess_too_low():
     # If secret is 50 and guess is 40, hint should be "Too Low"
     result = check_guess(40, 50)
     assert result == "Too Low"
+
+
+# FIX: Add tests for parse_guess to ensure it correctly handles out-of-range inputs based on two example difficulty settings. 
+@pytest.mark.parametrize("difficulty", ["Easy", "Hard"])
+def test_parse_guess_rejects_out_of_range_for_difficulty(difficulty):
+    min_val, max_val = get_range_for_difficulty(difficulty)
+
+    below_ok, below_value, below_error = parse_guess(str(min_val - 1), min_val, max_val)
+    assert below_ok is False
+    assert below_value is None
+    assert below_error == f"Guess must be between {min_val} and {max_val}."
+
+    above_ok, above_value, above_error = parse_guess(str(max_val + 1), min_val, max_val)
+    assert above_ok is False
+    assert above_value is None
+    assert above_error == f"Guess must be between {min_val} and {max_val}."

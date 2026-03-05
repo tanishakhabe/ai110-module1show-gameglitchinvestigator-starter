@@ -8,6 +8,9 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 - List at least two concrete bugs you noticed at the start  
   (for example: "the secret number kept changing" or "the hints were backwards").
 
+One bug I noticed was that the user could input guesses outside of the number range and also input negative numbers. It should throw a warning or error if the user tries to guess outside of the range. Another bug that I noticed was the number ranges for each of the difficulty levels was off. The normal level range was from 1-100, while the hard level range was smaller from 1-50, and I expected this to be flipped. Another bug that I noticed is the hints were backwards. For example, in one round the secret number was 75, so I guessed 76, but it hinted to "go higher". 
+
+
 ---
 
 ## 2. How did you use AI as a teammate?
